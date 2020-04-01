@@ -11,6 +11,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const appRoutes: Routes = [
   { path: 'new', component: AddMatchComponent },
@@ -33,7 +34,8 @@ const appRoutes: Routes = [
     BrowserModule,
     MaterialModule,
     RouterModule.forRoot(appRoutes),
-    LayoutModule
+    LayoutModule,
+    ReactiveFormsModule
   ],
   exports: [
     AppComponent

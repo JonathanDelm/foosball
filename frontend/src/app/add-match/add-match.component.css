@@ -1,0 +1,53 @@
+.formDiv {
+    padding: 8px 48px;
+}
+
+.teamContainer mat-form-field {
+    width: 100%;
+  }
+
+.formTitle {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    /* font-style: italic; */
+    font-weight: 500;
+}
+
+.scoreContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.scoreContainer mat-form-field {
+    width: 45%;
+}
+
+button {
+    margin-top: 16px;
+    width: 100%;
+    color: #6200eeff;
+}
+
+.alert-danger {
+    padding-top: 8px;
+}
+
+::ng-deep .mat-form-field-flex > .mat-form-field-infix { padding: 0.6em 0px !important;}
+::ng-deep .mat-form-field-label-wrapper { top: -1.2em; }
+::ng-deep .mat-form-field-wrapper { padding-bottom: 16px; }
+
+::ng-deep .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+    transform: translateY(-1.1em) scale(.8);
+    width: 133.33333%;
+}
+
+
+/* 
+::ng-deep .mat-form-field-flex > .mat-form-field-infix { padding: 0.4em 0px !important;}
+::ng-deep .mat-form-field-label-wrapper { top: -1.5em; }
+::ng-deep .mat-form-field-wrapper { padding-bottom: 8px; }
+
+::ng-deep .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+    transform: translateY(-1.1em) scale(.8);
+    width: 133.33333%;
+} */
