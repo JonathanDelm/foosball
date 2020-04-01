@@ -1,4 +1,9 @@
-<mat-drawer-container [hasBackdrop]="true" class="drawer-container">
+<app-main-nav>
+    <router-outlet></router-outlet>
+</app-main-nav>
+
+<!-- MANUEEL GEMAAKTE NAV -->
+<!-- <mat-drawer-container [hasBackdrop]="true" class="drawer-container">
     <mat-drawer #drawer>
         <div class="drawerDiv">
             <button mat-button (click)="drawer.close()">
@@ -31,4 +36,4 @@
         </div>
 
     </mat-drawer-content>
-  </mat-drawer-container>
+  </mat-drawer-container> -->

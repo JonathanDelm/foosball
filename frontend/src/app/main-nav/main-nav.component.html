@@ -1,0 +1,34 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <!-- NIET DE BESTE MANIER BUT IT WORKS -->
+      <a mat-list-item [routerLink]="['new']" *ngIf="isHandset$ | async" (click)="drawer.toggle()">Add match</a>
+      <a mat-list-item [routerLink]="['history']" *ngIf="isHandset$ | async" (click)="drawer.toggle()">Match history</a>
+      <a mat-list-item [routerLink]="['scoreboard']" *ngIf="isHandset$ | async" (click)="drawer.toggle()">Scoreboard</a>
+      
+      <a mat-list-item [routerLink]="['new']" *ngIf="(isHandset$ | async) === false">Add match</a>
+      <a mat-list-item [routerLink]="['history']" *ngIf="(isHandset$ | async) === false">Match history</a>
+      <a mat-list-item [routerLink]="['scoreboard']" *ngIf="(isHandset$ | async) === false">Scoreboard</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span class="toolbarTitle">Foosball Scorekeeping</span>
+    </mat-toolbar>
+    
+    <ng-content></ng-content>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

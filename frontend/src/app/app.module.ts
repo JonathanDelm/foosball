@@ -9,6 +9,8 @@ import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 import { MaterialModule } from './material/material.module';
 import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { MainNavComponent } from './main-nav/main-nav.component';
+import { LayoutModule } from '@angular/cdk/layout';
 
 const appRoutes: Routes = [
   { path: 'new', component: AddMatchComponent },
@@ -24,12 +26,14 @@ const appRoutes: Routes = [
     AddMatchComponent,
     MatchHistoryComponent,
     ScoreboardComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    MainNavComponent
   ],
   imports: [
     BrowserModule,
     MaterialModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    LayoutModule
   ],
   exports: [
     AppComponent
