@@ -1,0 +1,25 @@
+.formDiv {
+    padding: 8px 16px;
+}
+
+.title {
+    padding-left: 32px;
+}
+
+.table-container {
+    overflow: auto;
+    margin-top: 16px;
+}
+
+table {
+    min-width: 100%;
+    width: max-content;
+}
+
+.mat-cell, .mat-header-cell {
+    padding: 16px;
+}
+
+mat-form-field {
+    width: 100%;
+}
