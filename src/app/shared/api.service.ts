@@ -27,7 +27,13 @@ export class ApiService {
 
   // Get all matches
   GetMatches() {
-    return this.http.get(`${this.endpoint}`);
+    return this.http
+      .get(`${this.endpoint}`)
+      .pipe(
+        map((list: any[]): Match[] =>
+          list.map(Match.fromJSON)
+        )
+      );
   }
 
   // Get match

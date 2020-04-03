@@ -1,9 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MATCHES } from '../mock-matches';
 import { MatSort } from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { Match } from '../match.model';
-import { MatchDataService } from '../match-data.service';
+import { ApiService } from '../shared/api.service';
 
 @Component({
   selector: 'app-match-history',
@@ -11,16 +10,26 @@ import { MatchDataService } from '../match-data.service';
   styleUrls: ['./match-history.component.css']
 })
 export class MatchHistoryComponent implements OnInit {
-  displayedColumns = ['team1', 'score', 'team2', 'dateAdded'];
-  dataSource = new MatTableDataSource(this.matches);
+  MatchData: Match[] = [];
+  dataSource: MatTableDataSource<Match>;
+  displayedColumns: string[] = ['team1', 'score', 'team2', 'dateAdded'];
 
-  constructor(private _matchDataService: MatchDataService) { }
+  constructor(private matchApi: ApiService) {
+    this.matchApi.GetMatches().subscribe(data => {
+      console.log(data);
+
+      this.MatchData = data;
+      this.dataSource = new MatTableDataSource<Match>(this.MatchData);
+
+      setTimeout(() => {
+        this.dataSource.sort = this.sort;
+      }, 0);
+    })    
+  }
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  ngOnInit() {
-    this.dataSource.sort = this.sort;
-    
+  ngOnInit() {    
     this.dataSource.filterPredicate = (match: Match, filter: string) => {
       const scoreString1 = match.scoreTeam1.toString() + ' - ' + match.scoreTeam2.toString();
       const scoreString2 = match.scoreTeam1.toString() + '-' + match.scoreTeam2.toString();
@@ -43,10 +52,6 @@ export class MatchHistoryComponent implements OnInit {
   applyScoreFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
-  get matches(): Match[] {
-    return this._matchDataService.matches;
   }
 
 }
