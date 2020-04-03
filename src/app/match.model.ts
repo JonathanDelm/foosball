@@ -1,4 +1,5 @@
 interface MatchJson {
+    id: string;
     player1Team1: string;
     player2Team1: string;
     player1Team2: string;
@@ -10,6 +11,7 @@ interface MatchJson {
 
 export class Match {
     constructor(
+        private _id: string,
         private _player1Team1: string,
         private _player2Team1: string,
         private _player1Team2: string,
@@ -20,8 +22,20 @@ export class Match {
     ) {}
     
     static fromJSON(json: MatchJson): Match {
-        const match = new Match(json.player1Team1, json.player2Team1, json.player1Team2, json.player2Team2, json.scoreTeam1, json.scoreTeam2, new Date(json.dateAdded));
+        const match = new Match(json.id, json.player1Team1, json.player2Team1, json.player1Team2, json.player2Team2, json.scoreTeam1, json.scoreTeam2, new Date(json.dateAdded));
         return match;
+    }
+
+    toJSON() {
+        return {
+            player1Team1: this._player1Team1,
+            player2Team1: this._player2Team1,
+            player1Team2: this._player1Team2,
+            player2Team2: this._player2Team2,
+            scoreTeam1: this._scoreTeam1,
+            scoreTeam2: this._scoreTeam2,
+            dateAdded: this._dateAdded
+        };
     }
 
     // Getters for match history prints
@@ -42,6 +56,10 @@ export class Match {
     }
 
     // Standard getters
+    public get id() : string {
+        return this._id;
+    }
+
     public get player1Team1() : string {
         return this._player1Team1;
     }

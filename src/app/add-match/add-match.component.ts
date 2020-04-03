@@ -1,8 +1,9 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, ValidatorFn, ValidationErrors } from '@angular/forms';
-import { Match } from '../match.model';
 import { MatchDataService } from '../match-data.service';
 import { Router } from '@angular/router';
+import { ApiService } from '../shared/api.service';
+import { Match } from '../match.model';
 
 const fourPlayerValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
   const p1 = control.get('team1Player2Control').value;
@@ -38,6 +39,7 @@ export class AddMatchComponent implements OnInit {
 
   constructor(private fb: FormBuilder, 
     private _matchDataService: MatchDataService,
+    private matchApi: ApiService,
     private router: Router) { }
 
   ngOnInit(): void {
@@ -45,11 +47,16 @@ export class AddMatchComponent implements OnInit {
   }
 
   onSubmit() {
-    const newMatch = new Match(this.match.value.team1Player1Control, this.match.value.team1Player2Control, this.match.value.team2Player1Control,
+    const newMatch = new Match("ADDED_MATCH_ID",this.match.value.team1Player1Control, this.match.value.team1Player2Control, this.match.value.team2Player1Control,
       this.match.value.team2Player2Control, this.match.value.scoreTeam1, this.match.value.scoreTeam2, new Date());
-    this._matchDataService.addNewMatch(newMatch);
+    // this._matchDataService.addNewMatch(newMatch);
+    // this.router.navigateByUrl('/history');
 
-    this.router.navigateByUrl('/history');
+    if (this.match.valid) {
+      this.matchApi.AddMatch(newMatch).subscribe(res => {
+          this.router.navigateByUrl('/history')
+      });
+    }
 
     // this.resetFormBuilder();
   }
