@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, delay } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Match } from '../match.model';
 import { BACKEND_URL } from 'src/environments/environment';
@@ -23,7 +23,7 @@ export class ApiService {
   // Add match
   AddMatch(data: Match): Observable<any> {
     let API_URL = `${this.endpoint}/add-match`;
-    console.log(data.toJSON());
+    // console.log(data.toJSON());
     return this.http.post(API_URL, data.toJSON())
       .pipe(
         catchError(this.errorMgmt)
@@ -35,6 +35,7 @@ export class ApiService {
     return this.http
       .get(`${this.endpoint}`)
       .pipe(
+        delay(1000),
         map((list: any[]): Match[] =>
           list.map(Match.fromJSON)
         )

@@ -13,10 +13,10 @@ export class MatchHistoryComponent implements OnInit {
   MatchData: Match[] = [];
   dataSource: MatTableDataSource<Match>;
   displayedColumns: string[] = ['team1', 'score', 'team2', 'dateAdded'];
+  loadContent: Boolean = false;
 
   constructor(private matchApi: ApiService) {
     this.matchApi.GetMatches().subscribe(data => {
-      console.log(data);
 
       this.MatchData = data;
       this.dataSource = new MatTableDataSource<Match>(this.MatchData);
@@ -36,7 +36,9 @@ export class MatchHistoryComponent implements OnInit {
             scoreString3.includes(filter.toLowerCase()) || scoreString4.includes(filter.toLowerCase());
         };
       }, 0);
-    })    
+
+      this.loadContent = true;
+    }); 
   }
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;

@@ -34,7 +34,7 @@ const differentPlayerValidator: ValidatorFn = (control: FormGroup): ValidationEr
 })
 export class AddMatchComponent implements OnInit {
   public match: FormGroup;
-  players: string[] = ['Jonathan', 'Fien', 'Jasper', 'Isabel', 'Geert'];
+  players: string[] = ['Fien', 'Geert', 'Isabel', 'Jasper', 'Jonathan'];
 
   constructor(private fb: FormBuilder,
     private matchApi: ApiService,
@@ -45,16 +45,14 @@ export class AddMatchComponent implements OnInit {
   }
 
   onSubmit() {
-    const newMatch = new Match("",this.match.value.team1Player1Control, this.match.value.team1Player2Control, this.match.value.team2Player1Control,
-      this.match.value.team2Player2Control, this.match.value.scoreTeam1, this.match.value.scoreTeam2, new Date());
+    const newMatch = new Match("",this.match.value.team1Player1Control, (this.match.value.team1Player2Control || ""), this.match.value.team2Player1Control,
+    (this.match.value.team2Player2Control || ""), this.match.value.scoreTeam1, this.match.value.scoreTeam2, new Date());
 
     if (this.match.valid) {
       this.matchApi.AddMatch(newMatch).subscribe(res => {
           this.router.navigateByUrl('/history')
       });
     }
-
-    // this.resetFormBuilder();
   }
 
   resetFormBuilder() {

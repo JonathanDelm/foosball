@@ -1,9 +1,22 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* margin: 8px 48px; */
+}
+
+.filler {
+    flex-basis: 10%;
+}
+
 .formDiv {
-    padding: 8px 16px;
+    padding: 8px 16px 16px 16px;
+    width: 100%;
 }
 
 .title {
     padding-left: 32px;
+    /* margin-bottom: 12px; */
 }
 
 .table-container {
@@ -23,3 +36,17 @@ table {
 mat-form-field {
     width: 100%;
 }
+
+.spinner-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+
+@media screen and (min-width: 1200px) {
+    .filler {
+        flex-basis: 20%;
+    }
+  }
