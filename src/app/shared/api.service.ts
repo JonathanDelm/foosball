@@ -3,6 +3,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Match } from '../match.model';
+import { BACKEND_URL } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +11,14 @@ import { Match } from '../match.model';
 
 export class ApiService {
 
-  endpoint: string = 'http://localhost:4000/api';
+  // endpoint: string = 'http://localhost:4000/api';
+  endpoint: string;
+
   headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+      this.endpoint = BACKEND_URL;
+  }
 
   // Add match
   AddMatch(data: Match): Observable<any> {
