@@ -1,5 +1,14 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 8px 48px;
+}
+
 .formDiv {
-    padding: 8px 48px;
+    /* margin: 8px 48px; */
+    width: 100%;
+    max-width: 400px;
 }
 
 .teamContainer mat-form-field {
@@ -27,6 +36,13 @@ button {
     width: 100%;
     color: #6200eeff;
 }
+
+@media screen and (max-width: 400px) {
+    .wrapper {
+        margin: 8px 16px;
+    }
+  }
+
 
 .alert-danger {
     padding-top: 8px;

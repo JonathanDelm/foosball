@@ -1,87 +1,93 @@
-<div class="formDiv">
-    <h2>Add match</h2>
-    <form [formGroup]="match" (ngSubmit)='onSubmit()'>
-        <div class="formTitle">Team 1</div>
-        <div class="teamContainer">
-            <mat-form-field appearance="outline">
-                <mat-label>Player 1</mat-label>
-                <mat-select formControlName="team1Player1Control" required>
-                <mat-option>-</mat-option>
-                <mat-option *ngFor="let player of players" [value]="player">
-                    {{player}}
-                </mat-option>
-                </mat-select>
-                <mat-error *ngIf="match.get('team1Player1Control')['errors']?.required && 
-                    match.get('team1Player1Control').touched">
-                Is required
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-                <mat-label>Player 2</mat-label>
-                <mat-select formControlName="team1Player2Control">
-                <mat-option>-</mat-option>
-                <mat-option *ngFor="let player of players" [value]="player">
-                    {{player}}
-                </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-        <div class="formTitle">Team 2</div>
-        <div class="teamContainer">
-            <mat-form-field appearance="outline">
-                <mat-label>Player 1</mat-label>
-                <mat-select formControlName="team2Player1Control" required>
-                <mat-option>-</mat-option>
-                <mat-option *ngFor="let player of players" [value]="player">
-                    {{player}}
-                </mat-option>
-                </mat-select>
-                <mat-error *ngIf="match.get('team2Player1Control')['errors']?.required && 
-                    match.get('team2Player1Control').touched">
-                Is required
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-                <mat-label>Player 2</mat-label>
-                <mat-select formControlName="team2Player2Control">
-                <mat-option>-</mat-option>
-                <mat-option *ngFor="let player of players" [value]="player">
-                    {{player}}
-                </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-        <div class="formTitle">Score</div>
-        <div class="scoreContainer">
-            <mat-form-field appearance="outline">
-                <mat-label>Score team 1</mat-label>
-                <input matInput type="number" formControlName="scoreTeam1" required>
-                <mat-error *ngIf="match.get('scoreTeam1')['errors']?.required && 
-                    match.get('scoreTeam1').touched">
-                Is required
-                </mat-error>
-            </mat-form-field>
-            <span></span>
-            <mat-form-field appearance="outline">
-                <mat-label>Score team 2</mat-label>
-                <input matInput type="number" formControlName="scoreTeam2" required>
-                <mat-error *ngIf="match.get('scoreTeam2')['errors']?.required && 
-                    match.get('scoreTeam2').touched">
-                Is required
-                </mat-error>
-            </mat-form-field>
-        </div>
-        <button mat-stroked-button type='submit' [disabled]='!match.valid'>
-            Save
-        </button>
-        <mat-error *ngIf="match.errors?.doublePlayer && (match.touched || match.dirty)" class="doublePlayer-error-message alert alert-danger">
-            You can only select a player once.
-        </mat-error>
-        <mat-error *ngIf="match.errors?.threePlayer && ((match.get('team1Player2Control').touched && match.get('team2Player2Control').touched) || (match.get('scoreTeam1').dirty && match.get('scoreTeam2').dirty))" 
-            class="doublePlayer-error-message alert alert-danger">
-            A match needs either 2 or 4 players.
-        </mat-error>
-    </form>
+<div class="wrapper">
+    <span></span>
+    
+    <div class="formDiv">
+        <h2>Add match</h2>
+        <form [formGroup]="match" (ngSubmit)='onSubmit()'>
+            <div class="formTitle">Team 1</div>
+            <div class="teamContainer">
+                <mat-form-field appearance="outline">
+                    <mat-label>Player 1</mat-label>
+                    <mat-select formControlName="team1Player1Control" required>
+                    <mat-option>-</mat-option>
+                    <mat-option *ngFor="let player of players" [value]="player">
+                        {{player}}
+                    </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="match.get('team1Player1Control')['errors']?.required && 
+                        match.get('team1Player1Control').touched">
+                    Is required
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Player 2</mat-label>
+                    <mat-select formControlName="team1Player2Control">
+                    <mat-option>-</mat-option>
+                    <mat-option *ngFor="let player of players" [value]="player">
+                        {{player}}
+                    </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="formTitle">Team 2</div>
+            <div class="teamContainer">
+                <mat-form-field appearance="outline">
+                    <mat-label>Player 1</mat-label>
+                    <mat-select formControlName="team2Player1Control" required>
+                    <mat-option>-</mat-option>
+                    <mat-option *ngFor="let player of players" [value]="player">
+                        {{player}}
+                    </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="match.get('team2Player1Control')['errors']?.required && 
+                        match.get('team2Player1Control').touched">
+                    Is required
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Player 2</mat-label>
+                    <mat-select formControlName="team2Player2Control">
+                    <mat-option>-</mat-option>
+                    <mat-option *ngFor="let player of players" [value]="player">
+                        {{player}}
+                    </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="formTitle">Score</div>
+            <div class="scoreContainer">
+                <mat-form-field appearance="outline">
+                    <mat-label>Score team 1</mat-label>
+                    <input matInput type="number" formControlName="scoreTeam1" required>
+                    <mat-error *ngIf="match.get('scoreTeam1')['errors']?.required && 
+                        match.get('scoreTeam1').touched">
+                    Is required
+                    </mat-error>
+                </mat-form-field>
+                <span></span>
+                <mat-form-field appearance="outline">
+                    <mat-label>Score team 2</mat-label>
+                    <input matInput type="number" formControlName="scoreTeam2" required>
+                    <mat-error *ngIf="match.get('scoreTeam2')['errors']?.required && 
+                        match.get('scoreTeam2').touched">
+                    Is required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <button mat-stroked-button type='submit' [disabled]='!match.valid'>
+                Save
+            </button>
+            <mat-error *ngIf="match.errors?.doublePlayer && (match.touched || match.dirty)" class="doublePlayer-error-message alert alert-danger">
+                You can only select a player once.
+            </mat-error>
+            <mat-error *ngIf="match.errors?.threePlayer && ((match.get('team1Player2Control').touched && match.get('team2Player2Control').touched) || (match.get('scoreTeam1').dirty && match.get('scoreTeam2').dirty))" 
+                class="doublePlayer-error-message alert alert-danger">
+                A match needs either 2 or 4 players.
+            </mat-error>
+        </form>
+    </div>
+
+<span></span>
 </div>
 
 <!-- Used for debugging -->

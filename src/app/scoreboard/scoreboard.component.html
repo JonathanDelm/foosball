@@ -1,5 +1,70 @@
-<div class="underConstruction">
-    <mat-icon>build</mat-icon>   
-    Under construction
-    <mat-icon>build</mat-icon>   
+<div class="wrapper">
+    <span class="filler"></span>
+
+    <div class="formDiv">
+        <h2 class="title">Scoreboard</h2>
+
+        <div class="table-container mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource" matSort matSortActive="totalWinrate" matSortDirection="desc" matSortStart="desc" matSortDisableClear>
+
+                <ng-container matColumnDef="name" sticky>
+                    <th mat-header-cell *matHeaderCellDef> Player </th>
+                    <td mat-cell *matCellDef="let player" style="white-space: pre-line"> {{player.name}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="totalWins">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Total wins </th>
+                    <td mat-cell *matCellDef="let player" style="white-space: pre-line"> {{player.totalWins}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="totalMatches">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Total matches </th>
+                    <td mat-cell *matCellDef="let player" style="white-space: pre-line"> {{player.totalMatches}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="totalWinrate">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Total winrate </th>
+                    <td mat-cell *matCellDef="let player" style="white-space: pre-line"> {{player.totalWinrate | number : '1.0-0'}}%</td>
+                </ng-container>
+
+                <ng-container matColumnDef="soloWins">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Solo wins </th>
+                    <td mat-cell *matCellDef="let player" style="white-space: pre-line"> {{player.soloWins}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="soloMatches">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Solo matches </th>
+                    <td mat-cell *matCellDef="let player" style="white-space: pre-line"> {{player.soloMatches}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="soloWinrate">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Solo winrate </th>
+                    <td mat-cell *matCellDef="let player" style="white-space: pre-line"> {{player.soloWinrate | number : '1.0-0'}}%</td>
+                </ng-container>
+
+                <ng-container matColumnDef="duoWins">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Duo wins </th>
+                    <td mat-cell *matCellDef="let player" style="white-space: pre-line"> {{player.duoWins}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="duoMatches">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Duo matches </th>
+                    <td mat-cell *matCellDef="let player" style="white-space: pre-line"> {{player.duoMatches}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="duoWinrate">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Duo winrate </th>
+                    <td mat-cell *matCellDef="let player" style="white-space: pre-line"> {{player.duoWinrate | number : '1.0-0'}}%</td>
+                </ng-container>                
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+        <div *ngIf="!loadContent" class="spinner-wrapper">
+            <mat-spinner [diameter]="80"></mat-spinner>
+        </div>
+    </div>
+
+    <span class="filler"></span>
 </div>
