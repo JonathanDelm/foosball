@@ -1,6 +1,65 @@
-.underConstruction {
-    font-size: 28px;
-    margin-top: 50px;
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* margin: 8px 48px; */
+}
+
+.filler {
+    flex-basis: 10%;
+}
+
+.formDiv {
+    margin: 8px 16px 16px 16px;
+    width: 100%;
+}
+
+.title {
+    padding-left: 32px;
+    /* margin-bottom: 12px; */
+}
+
+.table-container {
+    overflow: auto;
+    margin-top: 16px;
+}
+
+table {
+    min-width: 100%;
+    /* width: max-content; */
+}
+
+.mat-header-cell {
+    padding: 16px;
+    padding-left: 24px;
+    padding-right: 8px;
+    justify-content: center;
     text-align: center;
-    color: #3f51b5;
+}
+
+.mat-cell {
+    padding: 16px;
+    justify-content: center;
+    text-align: center;
+}
+
+.mat-table-sticky:first-child {
+    border-right: 1px solid #e0e0e0;
+    padding-left: 16px;
+    justify-content: center;
+    text-align: center;
+}
+
+.spinner-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+}
+  
+
+@media screen and (min-width: 1200px) {
+    .filler {
+        flex-basis: 20%;
+    }
 }

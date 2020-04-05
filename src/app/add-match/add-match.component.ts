@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from '../shared/api.service';
-import { Match } from '../match.model';
+import { Match } from '../models/match.model';
 
 const fourPlayerValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
   const p1 = control.get('team1Player2Control').value;

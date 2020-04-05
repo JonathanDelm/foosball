@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map, delay } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Match } from '../match.model';
+import { Match } from '../models/match.model';
 import { BACKEND_URL } from 'src/environments/environment';
+import { Player } from '../models/player.model';
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +36,7 @@ export class ApiService {
     return this.http
       .get(`${this.endpoint}`)
       .pipe(
-        delay(1000),
+        // delay(1000),
         map((list: any[]): Match[] =>
           list.map(Match.fromJSON)
         )
@@ -65,6 +66,63 @@ export class ApiService {
   DeleteMatch(id): Observable<any> {
     var API_URL = `${this.endpoint}/delete-match/${id}`;
     return this.http.delete(API_URL).pipe(
+      catchError(this.errorMgmt)
+    )
+  }
+
+  // Get all players
+  GetPlayers(): Observable<any> {
+    var API_URL = `${this.endpoint}/players`;
+    return this.http
+    .get(API_URL)
+    .pipe(
+      // delay(1000),
+      map((list: any[]): Player[] =>
+        list.map(Player.fromJSON)
+      )
+    );
+  }
+
+  // Get solo matches per player
+  GetSoloMatches(): Observable<any> {
+  var API_URL = `${this.endpoint}/solo-matches`;
+  return this.http.get(API_URL, { headers: this.headers }).pipe(
+    map((res: Response) => {
+      return res || {}
+    }),
+    catchError(this.errorMgmt)
+  )
+}
+
+  // Get solo winner per player
+  GetSoloWins(): Observable<any> {
+    var API_URL = `${this.endpoint}/solo-wins`;
+    return this.http.get(API_URL, { headers: this.headers }).pipe(
+      map((res: Response) => {
+        return res || {}
+      }),
+      catchError(this.errorMgmt)
+    )
+  }
+
+  // Get solo matches per player
+  GetDuoMatches(): Observable<any> {
+    var API_URL = `${this.endpoint}/duo-matches`;
+    return this.http.get(API_URL, { headers: this.headers }).pipe(
+      map((res: Response) => {
+        return res || {}
+      }),
+      catchError(this.errorMgmt)
+    )
+  }
+
+  // Get duo winner counts
+  GetDuoWins(): Observable<any> {
+    var API_URL = `${this.endpoint}/duo-wins`;
+    return this.http.get(API_URL, { headers: this.headers }).pipe(
+      map((res: Response) => {
+        return res || {}
+      }),
       catchError(this.errorMgmt)
     )
   }
