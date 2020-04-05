@@ -1,5 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder, ValidatorFn, ValidationErrors } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, Validators, FormBuilder, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from '../shared/api.service';
 import { Match } from '../models/match.model';
@@ -34,21 +34,33 @@ const differentPlayerValidator: ValidatorFn = (control: FormGroup): ValidationEr
 })
 export class AddMatchComponent implements OnInit {
   public match: FormGroup;
-  players: string[] = ['Fien', 'Geert', 'Isabel', 'Jasper', 'Jonathan'];
+  players: string[] = [];
 
   constructor(private fb: FormBuilder,
     private matchApi: ApiService,
-    private router: Router) { }
+    private router: Router) {
+      this.players = ['Fien', 'Geert', 'Isabel', 'Jasper', 'Jonathan'];
+      // TODO !!
+      // this.matchApi.GetPlayers().subscribe(playerData => {
+      //   this.players = playerData.map(pl => pl.name).sort();
+      // });
+  }
 
   ngOnInit(): void {
     this.resetFormBuilder();
   }
 
   onSubmit() {
-    const newMatch = new Match("",this.match.value.team1Player1Control, (this.match.value.team1Player2Control || ""), this.match.value.team2Player1Control,
-    (this.match.value.team2Player2Control || ""), this.match.value.scoreTeam1, this.match.value.scoreTeam2, new Date());
-
     if (this.match.valid) {
+      var newMatch: Match;
+      if (this.match.value.scoreTeam1 >= this.match.value.scoreTeam2) {
+        newMatch = new Match("",this.match.value.team1Player1Control, (this.match.value.team1Player2Control || ""), this.match.value.team2Player1Control,
+          (this.match.value.team2Player2Control || ""), this.match.value.scoreTeam1, this.match.value.scoreTeam2, new Date());
+      } else {
+        newMatch = new Match("",this.match.value.team2Player1Control, (this.match.value.team2Player2Control || ""), this.match.value.team1Player1Control,
+          (this.match.value.team1Player2Control || ""), this.match.value.scoreTeam2, this.match.value.scoreTeam1, new Date());
+      }
+
       this.matchApi.AddMatch(newMatch).subscribe(res => {
           this.router.navigateByUrl('/history')
       });

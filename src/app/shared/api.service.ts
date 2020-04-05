@@ -24,7 +24,6 @@ export class ApiService {
   // Add match
   AddMatch(data: Match): Observable<any> {
     let API_URL = `${this.endpoint}/add-match`;
-    // console.log(data.toJSON());
     return this.http.post(API_URL, data.toJSON())
       .pipe(
         catchError(this.errorMgmt)

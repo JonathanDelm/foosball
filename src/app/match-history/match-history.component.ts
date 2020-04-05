@@ -12,7 +12,7 @@ import { ApiService } from '../shared/api.service';
 export class MatchHistoryComponent implements OnInit {
   MatchData: Match[] = [];
   dataSource: MatTableDataSource<Match>;
-  displayedColumns: string[] = ['team1', 'score', 'team2', 'dateAdded'];
+  displayedColumns: string[] = ['winningTeam', 'score', 'losingTeam', 'dateAdded'];
   loadContent: Boolean = false;
 
   constructor(private matchApi: ApiService) {
@@ -24,14 +24,14 @@ export class MatchHistoryComponent implements OnInit {
       setTimeout(() => {
         this.dataSource.sort = this.sort;
         this.dataSource.filterPredicate = (match: Match, filter: string) => {
-          const scoreString1 = match.scoreTeam1.toString() + ' - ' + match.scoreTeam2.toString();
-          const scoreString2 = match.scoreTeam1.toString() + '-' + match.scoreTeam2.toString();
-          const scoreString3 = match.scoreTeam2.toString() + ' - ' + match.scoreTeam1.toString();
-          const scoreString4 = match.scoreTeam2.toString() + '-' + match.scoreTeam1.toString();
-          return match.player1Team1.toLowerCase().includes(filter.toLowerCase()) ||
-            match.player2Team1.toLowerCase().includes(filter.toLowerCase()) || 
-            match.player1Team2.toLowerCase().includes(filter.toLowerCase()) ||
-            match.player2Team2.toLowerCase().includes(filter.toLowerCase()) ||
+          const scoreString1 = match.scoreWinningTeam.toString() + ' - ' + match.scoreLosingTeam.toString();
+          const scoreString2 = match.scoreWinningTeam.toString() + '-' + match.scoreLosingTeam.toString();
+          const scoreString3 = match.scoreLosingTeam.toString() + ' - ' + match.scoreWinningTeam.toString();
+          const scoreString4 = match.scoreLosingTeam.toString() + '-' + match.scoreWinningTeam.toString();
+          return match.winningPlayer1.toLowerCase().includes(filter.toLowerCase()) ||
+            match.winningPlayer2.toLowerCase().includes(filter.toLowerCase()) || 
+            match.losingPlayer1.toLowerCase().includes(filter.toLowerCase()) ||
+            match.losingPlayer2.toLowerCase().includes(filter.toLowerCase()) ||
             scoreString1.includes(filter.toLowerCase()) || scoreString2.includes(filter.toLowerCase()) ||
             scoreString3.includes(filter.toLowerCase()) || scoreString4.includes(filter.toLowerCase());
         };

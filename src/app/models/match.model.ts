@@ -1,57 +1,57 @@
 interface MatchJson {
     id: string;
-    player1Team1: string;
-    player2Team1: string;
-    player1Team2: string;
-    player2Team2: string;
-    scoreTeam1: number;
-    scoreTeam2: number;
+    winningPlayer1: string;
+    winningPlayer2: string;
+    losingPlayer1: string;
+    losingPlayer2: string;
+    scoreWinningTeam: number;
+    scoreLosingTeam: number;
     dateAdded: string;
 }
 
 export class Match {
     constructor(
         private _id: string,
-        private _player1Team1: string,
-        private _player2Team1: string,
-        private _player1Team2: string,
-        private _player2Team2: string,
-        private _scoreTeam1: number,
-        private _scoreTeam2: number,
+        private _winningPlayer1: string,
+        private _winningPlayer2: string,
+        private _losingPlayer1: string,
+        private _losingPlayer2: string,
+        private _scoreWinningTeam: number,
+        private _scoreLosingTeam: number,
         private _dateAdded: Date
     ) {}
     
     static fromJSON(json: MatchJson): Match {
-        const match = new Match(json.id, json.player1Team1, json.player2Team1, json.player1Team2, json.player2Team2, json.scoreTeam1, json.scoreTeam2, new Date(json.dateAdded));
+        const match = new Match(json.id, json.winningPlayer1, json.winningPlayer2, json.losingPlayer1, json.losingPlayer2, json.scoreWinningTeam, json.scoreLosingTeam, new Date(json.dateAdded));
         return match;
     }
 
     toJSON() {
         return {
-            player1Team1: this._player1Team1,
-            player2Team1: this._player2Team1,
-            player1Team2: this._player1Team2,
-            player2Team2: this._player2Team2,
-            scoreTeam1: this._scoreTeam1,
-            scoreTeam2: this._scoreTeam2,
+            winningPlayer1: this._winningPlayer1,
+            winningPlayer2: this._winningPlayer2,
+            losingPlayer1: this._losingPlayer1,
+            losingPlayer2: this._losingPlayer2,
+            scoreWinningTeam: this._scoreWinningTeam,
+            scoreLosingTeam: this._scoreLosingTeam,
             dateAdded: this._dateAdded
         };
     }
 
     // Getters for match history prints
-    public get team1Html(): string {
-        if (this.player2Team1 === '') {
-            return this.player1Team1;
+    public get winningTeamHtml(): string {
+        if (this.winningPlayer2 === '') {
+            return this.winningPlayer1;
         } else {
-            return this.player1Team1 + '\n\n' + this.player2Team1;
+            return this.winningPlayer1 + '\n\n' + this.winningPlayer2;
         }
     }
 
-    public get team2Html(): string {
-        if (this.player2Team2 === '') {
-            return this.player1Team2;
+    public get losingTeamHtml(): string {
+        if (this.losingPlayer2 === '') {
+            return this.losingPlayer1;
         } else {
-            return this.player1Team2 + '\n\n' + this.player2Team2;
+            return this.losingPlayer1 + '\n\n' + this.losingPlayer2;
         }
     }
 
@@ -60,28 +60,28 @@ export class Match {
         return this._id;
     }
 
-    public get player1Team1() : string {
-        return this._player1Team1;
+    public get winningPlayer1() : string {
+        return this._winningPlayer1;
     }
     
-    public get player2Team1() : string {
-        return this._player2Team1;
+    public get winningPlayer2() : string {
+        return this._winningPlayer2;
     }
 
-    public get player1Team2() : string {
-        return this._player1Team2;
+    public get losingPlayer1() : string {
+        return this._losingPlayer1;
     }
 
-    public get player2Team2() : string {
-        return this._player2Team2;
+    public get losingPlayer2() : string {
+        return this._losingPlayer2;
     }
 
-    public get scoreTeam1() : number {
-        return this._scoreTeam1;
+    public get scoreWinningTeam() : number {
+        return this._scoreWinningTeam;
     }
 
-    public get scoreTeam2() : number {
-        return this._scoreTeam2;
+    public get scoreLosingTeam() : number {
+        return this._scoreLosingTeam;
     }
 
     public get dateAdded() : Date {
