@@ -35,6 +35,7 @@ const differentPlayerValidator: ValidatorFn = (control: FormGroup): ValidationEr
 export class AddMatchComponent implements OnInit {
   public match: FormGroup;
   players: string[] = [];
+  submittingForm: boolean = false;
 
   constructor(private fb: FormBuilder,
     private matchApi: ApiService,
@@ -51,6 +52,7 @@ export class AddMatchComponent implements OnInit {
   }
 
   onSubmit() {
+    this.submittingForm = true;
     if (this.match.valid) {
       var newMatch: Match;
       if (this.match.value.scoreTeam1 >= this.match.value.scoreTeam2) {
@@ -63,6 +65,8 @@ export class AddMatchComponent implements OnInit {
 
       this.matchApi.AddMatch(newMatch).subscribe(res => {
           this.router.navigateByUrl('/history')
+          // Niet echt nodig..
+          this.submittingForm = false;
       });
     }
   }

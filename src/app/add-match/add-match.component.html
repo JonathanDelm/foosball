@@ -74,7 +74,7 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-            <button mat-stroked-button type='submit' [disabled]='!match.valid'>
+            <button mat-stroked-button type='submit' [class.spinner]="submittingForm" [disabled]='!match.valid || submittingForm'>
                 Save
             </button>
             <mat-error *ngIf="match.errors?.doublePlayer && (match.touched || match.dirty)" class="doublePlayer-error-message alert alert-danger">
